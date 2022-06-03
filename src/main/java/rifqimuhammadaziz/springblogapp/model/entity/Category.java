@@ -1,4 +1,4 @@
-package rifqimuhammadaziz.springblogapp.entity;
+package rifqimuhammadaziz.springblogapp.model.entity;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = false)
     private String name;
 
 }

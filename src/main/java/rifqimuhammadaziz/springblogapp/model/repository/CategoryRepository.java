@@ -1,7 +1,7 @@
-package rifqimuhammadaziz.springblogapp.repository;
+package rifqimuhammadaziz.springblogapp.model.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-import rifqimuhammadaziz.springblogapp.entity.Category;
+import rifqimuhammadaziz.springblogapp.model.entity.Category;
 
 import java.util.List;
 

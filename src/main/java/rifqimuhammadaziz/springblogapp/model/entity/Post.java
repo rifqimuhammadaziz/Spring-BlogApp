@@ -1,4 +1,4 @@
-package rifqimuhammadaziz.springblogapp.entity;
+package rifqimuhammadaziz.springblogapp.model.entity;
 
 import lombok.Data;
 
@@ -13,14 +13,15 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Category category;
 
     @Lob
-    @Column(name = "body")
+    @Column(name = "body", nullable = false)
     private String body;
 
 }
