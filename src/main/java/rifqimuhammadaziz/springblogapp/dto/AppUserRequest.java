@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -30,5 +31,7 @@ public class AppUserRequest {
     private String retypePassword;
 
     private AppUserRole appUserRole;
+
+    protected Date createdDate;
 
 }

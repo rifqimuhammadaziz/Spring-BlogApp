@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import rifqimuhammadaziz.springblogapp.model.entity.AppUserRole;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 public class AppUserResponse {
@@ -12,5 +14,5 @@ public class AppUserResponse {
     private String fullName;
     private String email;
     private AppUserRole appUserRole;
-
+    protected Date createdDate;
 }
