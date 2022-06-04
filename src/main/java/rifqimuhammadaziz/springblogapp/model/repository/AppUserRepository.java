@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AppUserRepository extends PagingAndSortingRepository<AppUser, Long> {
 
-    Optional<AppUser> findAllByEmail(String email);
+    Optional<AppUser> findByEmail(String email);
 }

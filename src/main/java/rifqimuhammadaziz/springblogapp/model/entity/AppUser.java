@@ -24,7 +24,7 @@ public class AppUser implements UserDetails {
     @Column(length = 150, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 150, nullable = false, unique = true)
+    @Column(length = 150, nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)

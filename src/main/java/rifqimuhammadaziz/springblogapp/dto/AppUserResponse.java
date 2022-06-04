@@ -1,14 +1,16 @@
 package rifqimuhammadaziz.springblogapp.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import rifqimuhammadaziz.springblogapp.model.entity.AppUserRole;
 
 @Data
-public class AppUserData {
+@NoArgsConstructor
+public class AppUserResponse {
 
+    private Long id;
     private String fullName;
     private String email;
-    private String password;
     private AppUserRole appUserRole;
 
 }
