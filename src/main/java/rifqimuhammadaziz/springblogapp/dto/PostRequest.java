@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class PostData {
+public class PostRequest {
 
     @NotEmpty(message = "Title is required")
     private String title;

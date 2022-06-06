@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import rifqimuhammadaziz.springblogapp.dto.CategoryData;
+import rifqimuhammadaziz.springblogapp.dto.CategoryRequest;
 import rifqimuhammadaziz.springblogapp.dto.ResponseData;
 import rifqimuhammadaziz.springblogapp.model.entity.Category;
 import rifqimuhammadaziz.springblogapp.service.CategoryService;
@@ -29,7 +29,7 @@ public class CategoryController {
     Save Category
      */
     @PostMapping
-    public ResponseEntity<ResponseData<Category>> save(@Valid @RequestBody CategoryData categoryData, Errors errors) {
+    public ResponseEntity<ResponseData<Category>> save(@Valid @RequestBody CategoryRequest categoryRequest, Errors errors) {
         ResponseData<Category> responseData = new ResponseData<>();
         if (errors.hasErrors()) {
             for (ObjectError error : errors.getAllErrors()) {
@@ -41,7 +41,7 @@ public class CategoryController {
         }
 
         // Transform object categoryData to Category
-        Category category = modelMapper.map(categoryData, Category.class);
+        Category category = modelMapper.map(categoryRequest, Category.class);
         responseData.setStatus(true);
         responseData.getMessages().add(category.getName() + " succesfully saved");
         responseData.setData(categoryService.save(category));
@@ -92,7 +92,7 @@ public class CategoryController {
     }
 
     @PutMapping
-    public ResponseEntity<ResponseData<Category>> update(@Valid @RequestBody CategoryData categoryData, Errors errors) {
+    public ResponseEntity<ResponseData<Category>> update(@Valid @RequestBody CategoryRequest categoryRequest, Errors errors) {
         ResponseData<Category> responseData = new ResponseData<>();
         if (errors.hasErrors()) {
             for (ObjectError error : errors.getAllErrors()) {
@@ -104,7 +104,7 @@ public class CategoryController {
         }
 
         // Transform object categoryData to Category
-        Category category = modelMapper.map(categoryData, Category.class);
+        Category category = modelMapper.map(categoryRequest, Category.class);
         responseData.setStatus(true);
         responseData.getMessages().add("Category with Id: " + category.getId() + " succesfully updated");
         responseData.setData(categoryService.save(category));

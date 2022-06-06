@@ -7,10 +7,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
@@ -19,16 +16,20 @@ import java.util.Date;
 public class BaseEntity<T> {
 
     @CreatedBy
+    @Column(nullable = false, updatable = false)
     protected T createdBy;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, updatable = false)
     protected Date createdDate;
 
     @LastModifiedBy
+    @Column(nullable = false)
     protected T updatedBy;
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     protected Date updatedDate;
 }

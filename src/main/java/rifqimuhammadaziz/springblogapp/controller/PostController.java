@@ -7,14 +7,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import rifqimuhammadaziz.springblogapp.dto.PostData;
+import rifqimuhammadaziz.springblogapp.dto.PostRequest;
+import rifqimuhammadaziz.springblogapp.dto.PostResponse;
 import rifqimuhammadaziz.springblogapp.dto.ResponseData;
 import rifqimuhammadaziz.springblogapp.dto.SearchData;
 import rifqimuhammadaziz.springblogapp.model.entity.Post;
+import rifqimuhammadaziz.springblogapp.model.entity.Tag;
 import rifqimuhammadaziz.springblogapp.service.PostService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -27,7 +30,7 @@ public class PostController {
     private ModelMapper modelMapper;
 
     @PostMapping
-    public ResponseEntity<ResponseData<Post>> create(@Valid @RequestBody PostData postData, Errors errors) {
+    public ResponseEntity<ResponseData<Post>> create(@Valid @RequestBody PostRequest postRequest, Errors errors) {
         ResponseData<Post> responseData = new ResponseData<>();
         if (errors.hasErrors()) {
             for (ObjectError error : errors.getAllErrors()) {
@@ -39,7 +42,7 @@ public class PostController {
         }
 
         // Transform object postData to Post
-        Post post = modelMapper.map(postData, Post.class);
+        Post post = modelMapper.map(postRequest, Post.class);
         responseData.setStatus(true);
         responseData.getMessages().add("Post successfully saved");
         responseData.setData(postService.save(post));
@@ -47,8 +50,9 @@ public class PostController {
     }
 
     @GetMapping
-    public Iterable<Post> findAll() {
-        return postService.findAll();
+    public List<PostResponse> findAll() {
+        return postService.findAll().stream().map(post -> modelMapper.map(post, PostResponse.class)).collect(Collectors.toList());
+//        return postService.findAll();
     }
 
     @GetMapping("/{id}")
@@ -93,5 +97,10 @@ public class PostController {
     @PostMapping("/search/category")
     public List<Post> findPostsByCategoryName(@RequestBody SearchData searchData) {
         return postService.findPostsByCategoryName(searchData.getSearchKey());
+    }
+
+    @PostMapping("/{postId}")
+    public void addTag(@RequestBody Tag tag, @PathVariable("postId") Long postId) {
+        postService.addTag(tag, postId);
     }
 }

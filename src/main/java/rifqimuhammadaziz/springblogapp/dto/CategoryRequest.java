@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class CategoryData {
+public class CategoryRequest {
 
     private Long id;
 

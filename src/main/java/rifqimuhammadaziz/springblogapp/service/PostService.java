@@ -3,6 +3,7 @@ package rifqimuhammadaziz.springblogapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.springblogapp.model.entity.Post;
+import rifqimuhammadaziz.springblogapp.model.entity.Tag;
 import rifqimuhammadaziz.springblogapp.model.repository.PostRepository;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class PostService {
     /*
     FIND ALL POSTS
      */
-    public Iterable<Post> findAll() {
-        return postRepository.findAll();
+    public List<Post> findAll() {
+        return (List<Post>) postRepository.findAll();
     }
 
     /*
@@ -69,5 +70,17 @@ public class PostService {
      */
     public List<Post> findPostsByCategoryName(String postCategory) {
         return postRepository.findPostsByCategoryName(postCategory);
+    }
+
+    /*
+    ASSIGN TAGS
+     */
+    public void addTag(Tag tag, Long postId) {
+        Post post = findById(postId);
+        if (post == null) {
+            throw new RuntimeException("Post with id: " + postId + " not found");
+        }
+        post.getTags().add(tag);
+        save(post);
     }
 }
